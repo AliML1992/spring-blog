@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/writer-fragments :: head">
+    <title>Bootstrap 4 Blog Template For Developers</title>
+</head>
+<body th:style="'background: url(/images/writer/bg1.jpg) no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;'">
+<div class="container">
+    <div th:replace="common/writer-fragments :: navbar"></div>
+    <div class="row mt-3 ">
+        <div class="col-sm-10 col-md-10 col-lg-10 mx-auto bg-light">
+            <h2 class="text-center">Welcome to Writer's Page</h2>
+            <p class="text-secondary text-center"> Write an incredible post</p>
+            <form action="#" th:action="@{/user/post/add}"  th:object="${post}" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="title" >Post Title</label>
+                    <input  th:field="*{title}" type="text" class="form-control" id="title" placeholder="Enter a title for article">
+                    <p class="alert-warning" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Example file input</label>
+                    <input th:field="*{postImage}" type="file" class="form-control-file" id="exampleFormControlFile1">
+                </div>
+                <div class="form-group">
+                    <label for="editor1">Post Body</label>
+                    <textarea name="editor1" th:field="*{postBody}"  class="form-control" id="editor1" rows="10"></textarea>
+                    <p class="alert-warning" th:if="${#fields.hasErrors('postBody')}" th:errors="*{postBody}"></p>
+                </div>
+                <div class="form-group">
+                    <label for="sel1">Select a category :</label>
+                    <select class="form-control" id="sel1" th:field="*{category}">
+                        <option th:value="'Java'">Java</option>
+                        <option th:value="'Spring'">Spring</option>
+                        <option th:value="'Node.js'">Node.js</option>
+                        <option th:value="'React'">React</option>
+                        <option th:value="'Javascript'">Javascript</option>
+                    </select>
+                </div>
+
+                <!--  Tag  -->
+                <div class='form-group'>
+                    <label for="search">Add some predefined #tags :</label>
+                    <select th:field="*{tag}"  id="search" multiple="multiple">
+                        <option th:value="'front-end'">Front End</option>
+                        <option th:value="'back-end'">Back-End</option>
+                        <option th:value="'designer'">Designer</option>
+                        <option th:value="'ruby'">Ruby</option>
+                        <option th:value="'javascript'">JavaScript</option>
+                        <option th:value="'python'">Python</option>
+                        <option th:value="'developer'">Developer</option>
+                        <option th:value="'wordpress'">WordPress</option>
+                        <option th:value="'php'">PHP</option>
+                        <option th:value="'html'">HTML</option>
+                        <option th:value="'css'">CSS</option>
+                        <option th:value="'jquery'">JQuery</option>
+                        <option th:value="'ember'">Ember</option>
+                        <option th:value="'angular'">Angular</option>
+                        <option th:value="'react'">React</option>
+                        <option th:value="'ios'">iOS</option>
+                        <option th:value="'android'">Android</option>
+                        <option th:value="'java'">Java</option>
+                        <option th:value="'git'">Git</option>
+                        <option th:value="'sass'">Sass</option>
+                        <option th:value="'engineer'">Engineer</option>
+                    </select>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary">Save Post</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <br>
+</div>
+<div th:replace="common/writer-fragments :: footer"></div>
+
+</body>
+</html>

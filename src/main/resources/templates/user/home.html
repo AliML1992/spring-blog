@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="common/writer-fragments :: head">
+    <title>Bootstrap 4 Blog Template For Developers</title>
+
+</head>
+<body th:style="'background: url(/images/writer/bg1.jpg) no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;'">
+<div class="container">
+    <div th:replace="common/writer-fragments :: navbar"></div>
+    <div class="row mt-3">
+        <div class="col-8 mx-auto bg-light">
+            <h2 align="center">These are non published posts</h2>
+            <p class="text-secondary text-center">Please check your posts before making them public</p>
+            <p th:if="${successMessage}">
+            <span th:text="${successMessage}"> </span>
+            </p>
+            <p th:if="${nonActiveMessage}">
+                <span th:text="${nonActiveMessage}"> </span>
+            </p>
+            <p th:if="${updatedMessage}">
+                <span th:text="${updatedMessage}"> </span>
+            </p>
+            <p th:if="${publishedMessage}">
+                <span th:text="${publishedMessage}"> </span>
+            </p>
+            <table class="table table-hover" th:if="${posts}">
+                <thead>
+                <tr>
+                    <th scope="col-sm-1">#</th>
+                    <th scope="col-sm-9">Post Title</th>
+                    <th scope="col-sm-1">Edit</th>
+                    <th scope="col-sm-1">Preview</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="post : ${posts}">
+                    <th scope="row" th:text="${post.id}"></th>
+                    <td th:text="${post.title}"></td>
+                    <td><a class="btn btn-primary" th:href="@{'/user/post/' + ${post.id} + '/edit'}">Edit</a>
+                    <td><a class="btn btn-primary" th:href="@{'/user/post/' + ${post.id} + '/preview'}">Preview</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div th:replace="common/writer-fragments :: footer"></div>
+</body>
+</html>

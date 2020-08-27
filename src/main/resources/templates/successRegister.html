@@ -1,0 +1,24 @@
+<html  xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII"/>
+    <title th:utext="#{label.pages.home.title}">home</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-7 mx-auto mt-5">
+            <h3 class="text-success">We have sent a confirmation message to the email:
+                <span th:text="${email}"></span></h3>
+            <hr>
+            <p>
+                Go to your email inbox and confirm the message to active your account.
+            </p>
+            <a th:href="@{/login}" th:utext="#{label.login}">login</a>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

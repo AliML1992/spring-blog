@@ -1,0 +1,52 @@
+#flip-container {
+    position: relative;
+    margin: 15px auto;
+    width: 600px;
+    height: 575px;
+    z-index: 1;
+    perspective: 1500px;
+
+}
+#flip-card {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: all 0.5s linear;
+    box-shadow: 5px 5px 5px #aaa;
+
+}
+#flip-container.flipped #flip-card {
+    transform: rotateY(180deg);
+    box-shadow: -5px 5px 5px #aaa;
+}
+.face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    padding:15px;
+    background-color: #5a5a5a;
+    border-radius: 0 20px;
+}
+.back{
+    padding:15px;
+    background-color:#5a5a5a;
+}
+.face.back {
+    display: block;
+    transform: rotateY(180deg);
+    box-sizing: border-box;
+}
+.cm {
+    color: #f1f1f1 !important;
+}
+.warning{
+    color: #ff6461 !important;
+    background: white;
+    padding: 1px;
+    border-radius: 0 2px 2px 2px;
+    font-size: 90%;
+}
+.c-block {
+    display: block;
+}
