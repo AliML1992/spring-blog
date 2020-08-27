@@ -33,6 +33,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("select new Post(p.id, p.title) from Post p where p.active = true order by p.modifiedDate desc")
     Page<Post> retrieveAll(Pageable pageable);
 
-    @Override
-    void deleteById(Long aLong);
+    @Query("select new Post(p.id, p.title,p.createdDate, p.modifiedDate,p.user, p.category) from Post p  where p.active = true order by p.modifiedDate desc")
+    Page<Post> retrieveForHomePage(Pageable pageable);
+
 }

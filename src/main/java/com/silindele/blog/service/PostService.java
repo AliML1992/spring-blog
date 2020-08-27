@@ -14,4 +14,5 @@ public interface PostService {
     void save(PostDto postDto, Post post, Principal principal);
     List<Post> getNonActive();
     Page<Post> retrieveByPage(int pageNo);
+    Page<Post> retrieveForHomePage(int pageNo);
 }

@@ -55,9 +55,21 @@ public class Post implements Serializable {
     public Post() {
     }
 
-    public Post(Long id, String title) {
+    public Post(Long id, String title){
         this.id = id;
         this.title = title;
+    }
+
+    public Post(Long id, String title,
+                Date createdDate, Date modifiedDate,
+                User user,
+                Category category) {
+        this.id = id;
+        this.title = title;
+        this.createdDate = createdDate;
+        this.modifiedDate = modifiedDate;
+        this.user = user;
+        this.category = category;
     }
 
     public void addTag(Tag tag) {

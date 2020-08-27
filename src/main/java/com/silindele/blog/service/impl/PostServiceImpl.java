@@ -81,6 +81,12 @@ public class PostServiceImpl implements PostService {
         return postRepository.retrieveAll(pageable);
     }
 
+    @Override
+    public Page<Post> retrieveForHomePage(int pageNo) {
+        Pageable pageable = PageRequest.of(pageNo - 1 , 3 );
+        return postRepository.retrieveForHomePage(pageable);
+    }
+
     public List<String> split(String str){
         return Stream.of(str.split(","))
                 .map (elem -> new String(elem))
