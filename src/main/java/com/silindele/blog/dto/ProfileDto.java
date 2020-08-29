@@ -1,57 +1,27 @@
-package com.silindele.blog.entity;
+package com.silindele.blog.dto;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.mail.Multipart;
+import javax.validation.constraints.NotBlank;
 
-@Entity
-public class UserProfile implements Serializable {
+public class ProfileDto {
 
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @NotBlank
     private String firstname;
+
+    @NotBlank
     private String lastname;
-    @Column(columnDefinition = "text")
+
+    @NotBlank
     private String description;
     private String bio;
     private String twitterLink;
     private String facebookLink;
     private String instagramLink;
+    private MultipartFile image;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    public UserProfile() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public ProfileDto() {
     }
 
     public String getFirstname() {
@@ -68,6 +38,14 @@ public class UserProfile implements Serializable {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getBio() {
@@ -100,5 +78,13 @@ public class UserProfile implements Serializable {
 
     public void setInstagramLink(String instagramLink) {
         this.instagramLink = instagramLink;
+    }
+
+    public MultipartFile getImage() {
+        return image;
+    }
+
+    public void setImage(MultipartFile image) {
+        this.image = image;
     }
 }

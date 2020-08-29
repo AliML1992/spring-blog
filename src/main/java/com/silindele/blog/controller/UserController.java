@@ -1,12 +1,16 @@
 package com.silindele.blog.controller;
 
 import com.silindele.blog.dto.PostDto;
+import com.silindele.blog.dto.ProfileDto;
 import com.silindele.blog.entity.Post;
+import com.silindele.blog.entity.User;
+import com.silindele.blog.entity.UserProfile;
 import com.silindele.blog.repository.PostRepository;
+import com.silindele.blog.repository.ProfileRepository;
+import com.silindele.blog.repository.UserRepository;
 import com.silindele.blog.service.PostService;
+import com.silindele.blog.service.UserService;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,10 +35,16 @@ public class UserController {
 
     private final PostService postService;
     private final PostRepository postRepository;
+    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public UserController(PostService postService, PostRepository postRepository) {
+    public UserController(PostService postService,
+                          PostRepository postRepository,
+                          UserRepository userRepository, UserService userService) {
         this.postService = postService;
         this.postRepository = postRepository;
+        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @GetMapping("/post/add")
@@ -163,5 +173,51 @@ public class UserController {
         postRepository.deleteById(postId);
         model.addFlashAttribute("deletedMessage","Post with id: " + postId + "has been successfully deleted");
         return "redirect:/user/post/all";
+    }
+
+    @GetMapping("/profile")
+    public String showProfile(Model model,HttpServletRequest request){
+        String username = request.getUserPrincipal().getName();
+        User user = userRepository.findByUsername(username);
+        UserProfile userProfile = user.getUserProfile();
+        model.addAttribute("user", user);
+        model.addAttribute("userProfile", userProfile);
+        return "user/profile";
+    }
+
+    @GetMapping("/updateProfile")
+    public String updateProfile( Model model){
+        ProfileDto profileDto = new ProfileDto();
+        model.addAttribute("profile", profileDto);
+        return "user/profileForm";
+    }
+
+    @PostMapping("/updateProfile")
+    public String saveProfile(@Valid @ModelAttribute("profile") ProfileDto profileDto,
+                              BindingResult bindingResult,
+                              HttpServletRequest request,
+                              Model model){
+        String username = request.getUserPrincipal().getName();
+        User  user = userRepository.findByUsername(username);
+        if(bindingResult.hasErrors()){
+            model.addAttribute("profile", new ProfileDto());
+            return "user/profileForm";
+        }
+        userService.saveProfile(profileDto,user);
+        MultipartFile userImage = profileDto.getImage();
+
+        if (userImage != null){
+            try {
+                byte[] bytes = userImage.getBytes();
+                String name = user.getId() + ".png";
+                BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(new File("src/main/resources/static/images/writer/" + name)));
+                stream.write(bytes);
+                stream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return "redirect:/user/profile";
     }
 }

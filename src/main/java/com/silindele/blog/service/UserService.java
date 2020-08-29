@@ -1,5 +1,6 @@
 package com.silindele.blog.service;
 
+import com.silindele.blog.dto.ProfileDto;
 import com.silindele.blog.dto.UserDto;
 import com.silindele.blog.entity.User;
 import com.silindele.blog.entity.VerificationToken;
@@ -17,5 +18,7 @@ public interface UserService {
     void createVerificationTokenForUser(User user, String token);
 
     VerificationToken getVerificationToken(String VerificationToken);
+
+    void saveProfile(ProfileDto profileDto, User user);
 
 }

@@ -4,11 +4,11 @@
     <title>Bootstrap 4 Blog Template For Developers</title>
 
 </head>
-<body th:style="'background: url(/images/writer/bg2.jpg) no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;'">
+<body>
 <div class="container">
     <div th:replace="common/writer-fragments :: navbar"></div>
     <div class="row mt-3">
-        <div class="col-10 mx-auto bg-light">
+        <div class="col-sm-10 col-md-10 col-lg-10 mx-auto bg-light cont">
             <h2 align="center">These are non published posts</h2>
             <p class="text-secondary text-center">Please check your posts before making them public</p>
             <p th:if="${noActivePosts}"> <span th:text="${noActivePosts}"></span></p>

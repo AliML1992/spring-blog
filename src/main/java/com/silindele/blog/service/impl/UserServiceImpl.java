@@ -1,9 +1,12 @@
 package com.silindele.blog.service.impl;
 
+import com.silindele.blog.dto.ProfileDto;
 import com.silindele.blog.dto.UserDto;
 import com.silindele.blog.entity.User;
+import com.silindele.blog.entity.UserProfile;
 import com.silindele.blog.entity.VerificationToken;
 import com.silindele.blog.error.UserAlreadyExistException;
+import com.silindele.blog.repository.ProfileRepository;
 import com.silindele.blog.repository.UserRepository;
 import com.silindele.blog.repository.VerificationTokenRepository;
 import com.silindele.blog.service.UserService;
@@ -22,12 +25,14 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final VerificationTokenRepository tokenRepository;
+    private final ProfileRepository profileRepository;
 
     @Autowired
-    public UserServiceImpl(BCryptPasswordEncoder passwordEncoder, UserRepository userRepository, VerificationTokenRepository tokenRepository) {
+    public UserServiceImpl(BCryptPasswordEncoder passwordEncoder, UserRepository userRepository, VerificationTokenRepository tokenRepository, ProfileRepository profileRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.tokenRepository = tokenRepository;
+        this.profileRepository = profileRepository;
     }
 
     @Override
@@ -66,6 +71,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public VerificationToken getVerificationToken(String VerificationToken) {
         return tokenRepository.findByToken(VerificationToken);
+    }
+
+    @Override
+    public void saveProfile(ProfileDto profileDto, User user) {
+        UserProfile profile = new UserProfile();
+        profile.setFirstname(profileDto.getFirstname());
+        profile.setLastname(profileDto.getLastname());
+        profile.setBio(profileDto.getBio());
+        profile.setDescription(profileDto.getDescription());
+        profile.setTwitterLink(profileDto.getTwitterLink());
+        profile.setFacebookLink(profileDto.getFacebookLink());
+        profile.setInstagramLink(profileDto.getInstagramLink());
+        profile.setUser(user);
+        profileRepository.save(profile);
     }
 
 

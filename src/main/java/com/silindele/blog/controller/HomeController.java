@@ -38,10 +38,10 @@ public class HomeController {
         model.addAttribute("postList", postList);
         return "index";
     }
-
-    @GetMapping("/post/{postId}")
-    public String showSinglePost(@PathVariable("postId") Long postId,Model model){
-
-    }
+//
+//    @GetMapping("/post/{postId}")
+//    public String showSinglePost(@PathVariable("postId") Long postId,Model model){
+//
+//    }
 
 }

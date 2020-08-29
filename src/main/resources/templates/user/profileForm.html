@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="common/writer-fragments :: head">
+    <title>Bootstrap 4 Blog Template For Developers</title>
+
+</head>
+<body>
+<div class="container">
+    <div th:replace="common/writer-fragments :: navbar"></div>
+    <form class="row mt-3 " th:action="@{/user/updateProfile}" th:object="${profile}" method="post" enctype="multipart/form-data">
+        <div  class="col-lg-10 col-sm-10 mx-auto bg-light cont">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card my-2" >
+                        <div id="abc">
+                            <img src="/images/writer/avatar.png" class="card-img-top" alt="...">
+                            <div class="form-control ml-3 " id="abcd">
+                                <input type="file" class="form-control-file" id="image" th:field="*{image}">
+                                <label class="custom-file-label text-left" for="image">Choose Avatar</label>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <textarea class="form-control" th:field="*{bio}" rows="2" placeholder="bio">
+                            </textarea>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <label class="sr-only" for="twitter">Twitter Link</label>
+                                <div class="input-group mb-2 mr-sm-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text"><i class="fab fa-twitter"></i></div>
+                                    </div>
+                                    <input th:field="*{twitterLink}" type="url" class="form-control" id="twitter" placeholder="twitter link">
+                                </div>
+                                <label class="sr-only" for="facebook">Facebook Link</label>
+                                <div class="input-group mb-2 mr-sm-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text"><i class="fab fa-facebook"></i></div>
+                                    </div>
+                                    <input th:field="*{facebookLink}" type="url" class="form-control" id="facebook" placeholder="facebook link">
+                                </div>
+                                <label class="sr-only" for="instagram">Instagram Link</label>
+                                <div class="input-group mb-2 mr-sm-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text"><i class="fab fa-instagram"></i></div>
+                                    </div>
+                                    <input th:field="*{instagramLink}" type="url" class="form-control" id="instagram" placeholder="instagram link">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <ul class="list-group my-2">
+                        <li class="list-group-item">
+                            <h3 class="text-center">User Profile</h3>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="form-group row">
+                                <label for="firstname" class="col-sm-4 text-right col-form-label">Firstname</label>
+                                <div class="col-sm-8">
+                                    <input th:field="*{firstname}" type="text" class="form-control" id="firstname" placeholder="Firstname" required>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="form-group row">
+                                <label for="lastname" class="col-sm-4 text-right col-form-label">Last Name</label>
+                                <div class="col-sm-8">
+                                    <input th:field="*{lastname}" type="text" class="form-control" id="lastname" placeholder="Lastname" required>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="form-group row">
+                                <label for="description" class="col-sm-4 text-right col-form-label">Description</label>
+                                <div class="col-sm-8">
+                                    <textarea th:field="*{description}" rows="7" class="form-control" id="description" required placeholder="I am ..."></textarea>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6 ">
+                                   Let's <button type="submit" class="btn btn-dark"> save </button> it
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    I'm gonna <button type="reset" class="btn btn-dark "> reset</button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<div th:replace="common/writer-fragments :: footer"></div>
+</body>
+</html>
